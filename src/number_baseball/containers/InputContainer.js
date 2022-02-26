@@ -2,19 +2,24 @@ import React, { useState } from "react";
 import BallCountSubmitButton from "../components/atoms/BallCountSubmitButton";
 import InputNumberBox from "../components/atoms/InputNumberBox";
 import "./InputContainer.css";
-const InputContainer = () => {
-  const [ballCounts, setBallCounts] = useState([0, 0, 0, 0]);
+const InputContainer = ({ addBallCount }) => {
+  const [ballCountArray, setBallCountArray] = useState([0, 0, 0, 0]);
 
   const handleSubmit = () => {
-    console.log("submmit : " + ballCounts);
+    let ballCount = "";
+    for (let i = 0; i < 4; i++) {
+      ballCount = ballCount + ballCountArray[i];
+    }
+    addBallCount(ballCount);
   };
 
   const handleInput = (inputNumber, id) => {
-    let newBallCounts = ballCounts;
+    let newBallCounts = ballCountArray;
     newBallCounts[id] = +inputNumber;
-    setBallCounts(newBallCounts);
-    console.log(ballCounts);
+    setBallCountArray(newBallCounts);
+    console.log(ballCountArray);
   };
+
   return (
     <div>
       <InputNumberBox id='0' handleInput={handleInput} />

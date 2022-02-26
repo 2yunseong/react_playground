@@ -26,16 +26,24 @@ const makeRandomNumber = () => {
 };
 const GameBoard = () => {
   const [gameNumber, setGameNumber] = useState("");
+  const [ballCounts, setBallCount] = useState([]);
 
   useEffect(() => {
     setGameNumber(makeRandomNumber());
   }, []);
 
+  const addBallCount = (ballCount) => {
+    console.log(ballCount);
+    setBallCount([...ballCounts, ballCount]);
+  };
   return (
     <div>
       <h1>숫자 야구</h1>
       <p>{gameNumber}</p>
-      <InputContainer />
+      <InputContainer addBallCount={addBallCount} />
+      {ballCounts.map((element) => (
+        <div>{element}</div>
+      ))}
     </div>
   );
 };
